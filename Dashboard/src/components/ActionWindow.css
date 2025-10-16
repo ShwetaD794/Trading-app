@@ -218,4 +218,11 @@
     background: #9b9b9b;
     color: #fff;
   }
-  
+  .buy-btn{
+    border-radius: 10%;
+    border: 1px solid black;
+  }
+  .cancel-btn{
+    border-radius: 10%;
+    border: 1px solid black;
+  }

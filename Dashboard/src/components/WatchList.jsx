@@ -22,9 +22,7 @@ const WatchList = () => {
   const [chartData, setChartData] = useState(null);
   const { refreshKey } = useContext(GeneralContext);
 
-  // generate deterministic color per label to avoid collisions
   const stringToHslColor = (str, s = 70, l = 50, a = 0.6) => {
-    // simple hash
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
       hash = str.charCodeAt(i) + ((hash << 5) - hash);
