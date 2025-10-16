@@ -1,0 +1,10 @@
+nav{
+    background-color: #FFF;
+    border-bottom: 1px solid rgba(69, 54, 54, 0.1);
+}
+.container-fluid{
+    padding: 0 10%;
+}
+.nav-link{
+    margin-left: 40px;
+}

@@ -1,0 +1,38 @@
+.price img{
+    width: 50%;
+}
+.price p{
+    font-size: 15px;
+    color: gray;
+}
+.intro{
+    padding:1.5% 0 10% 0;
+}
+.intro p{
+    font-size: 18px;
+    color: rgb(115, 112, 112);
+}
+.table-container {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    width: 90%;
+    margin: auto;
+    margin-bottom: 5%;
+}
+ table {
+    width: 100%;
+}
+
+thead {
+    background-color: #f9f9f9;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    font-size: 12px;
+    border-bottom: 1px solid #eee;
+}
+.acc h5{
+    margin:0  0 2% 5%;
+}

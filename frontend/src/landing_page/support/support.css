@@ -1,0 +1,76 @@
+.topic-links a{
+    text-decoration: none;
+    font-size: 12px;
+}
+.ticket-heading{
+    padding-bottom: 2rem;
+}
+.topic-links{
+    margin-bottom: 5%;
+}
+.left{
+    text-align: left;
+}
+.right{
+    display: inline-block;
+    text-align: right;
+    width: 80%;
+    text-underline-offset: 5px;
+}
+.supportWrapper{
+    background-color: #2E9AFE;
+    color: white;
+    padding: 5%;
+}
+.supportWrapper p{
+    margin: 5% 0;
+    font-weight: 500;
+}
+.search-input {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+}
+
+.search-input input {
+  width: 100%;
+  padding: 10px 40px 10px 15px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+}
+
+.search-input i {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  font-size: 16px;
+  pointer-events: none; 
+}
+
+.support-links{
+    line-height: 2;
+}
+.support-links a{
+    color: white;
+    font-size: 15px;
+    padding: 15px;
+    text-decoration: underline ;
+    text-underline-offset: 5px;
+}
+.features{
+    line-height: 2.5;
+}
+.features a{
+    color: white;
+    text-underline-offset: 5px;
+    margin-left: 10%;
+    font-size: 15px;
+}
+.features h5{
+    margin-top: 5%;
+    margin-left: 5%;
+}

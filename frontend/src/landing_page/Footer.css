@@ -1,0 +1,45 @@
+.fcontain a{
+    text-decoration: none;
+    color: #656161;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1;
+}
+.fcontain{
+    background-color: ghostwhite;
+    border-top: 1px solid rgb(223, 223, 232);
+    padding: 0 15%;
+    padding-top: 20px;
+    margin-top: 5%;
+}
+.fparah{
+    font-size: 10px;
+    color: #787676;
+}
+.copyright{
+    font-size: 12px;
+    color: gray;
+}
+.parah{
+    padding: 2% 5%;
+}
+
+.fcontain i {
+    margin-right: 18px;
+    font-size: 20px;
+}
+.flinks a{
+    margin-right: 20px;
+    color: rgb(107, 103, 103);
+    font-size: 10px;
+    font-weight: 500;
+}
+.flinks{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3%;
+}
+.logo{
+    margin-right: 5%;
+}

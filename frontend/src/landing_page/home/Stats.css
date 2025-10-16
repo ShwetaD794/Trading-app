@@ -1,0 +1,27 @@
+.container{
+    padding: 0 5%;
+    margin-top: 6%;
+}
+.container p{
+    padding-bottom: 0.8rem;
+}
+.image img{
+    width: 90%;
+}
+
+.links{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 8%;
+}
+.logos{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3%;
+}
+.logos img{
+    width: 50%;
+}
+
