@@ -22,8 +22,8 @@ const app = express();
 app.use(
   cors({
     origin: [
-      "http://localhost:5173", // Dashboard
-      "http://localhost:5174", // Frontend
+      "http://localhost:5173", // Frontend
+      "http://localhost:5174", // Dashboard
       "http://localhost:3000",
       "https://trading-app3.onrender.com",
       "https://trading-appd.onrender.com"
@@ -67,6 +67,8 @@ app.post("/signup", async (req, res) => {
   res.send("User registered successfully");
 });
 
+const isProd = process.env.NODE_ENV === "production";
+
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
@@ -83,8 +85,8 @@ app.post("/login", async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
+      secure: isProd,
+      sameSite: isProd ? "none" : "lax",
       maxAge: 24 * 60 * 60 * 1000, 
     });
 
@@ -98,7 +100,9 @@ app.post("/login", async (req, res) => {
 });
 
 app.post("/logout", (req, res) => {
-  res.clearCookie("token", { httpOnly: true, sameSite: "lax" });
+  res.clearCookie("token", { httpOnly: true,
+  secure: isProd,
+  sameSite: isProd ? "none" : "lax", });
   res.json({ ok: true });
 });
 
