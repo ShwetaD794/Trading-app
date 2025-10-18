@@ -394,6 +394,103 @@ hr {
   border-bottom: 1px solid rgb(211, 211, 211);
 }
 
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+  }
+
+  .menu-container {
+    flex-basis: auto;
+    width: 100%;
+    padding: 8px 12px;
+    box-sizing: border-box;
+    order: 1;
+  }
+
+  .menus li {
+    margin-right: 14px;
+  }
+
+  .content {
+    flex-basis: auto;
+    width: 100%;
+    padding: 2% 3%;
+    order: 2;
+    height: auto;
+  }
+
+  .row {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 4%;
+  }
+
+  .col {
+    flex-basis: 100%;
+  }
+
+  .funds {
+    justify-content: flex-start;
+    text-align: left;
+    margin-bottom: 8px;
+  }
+
+  .orders {
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-container {
+    padding: 0 8px;
+  }
+
+  .menu-container {
+    padding: 6px 8px;
+  }
+
+  .menus li {
+    margin-right: 10px;
+  }
+
+  .menu {
+    font-size: 0.75rem;
+  }
+
+  .profile .username {
+    display: none; 
+  }
+
+  .content {
+    padding: 12px 8px;
+  }
+
+  .title {
+    font-size: 1.1rem;
+  }
+
+  .order-table th,
+  .order-table td {
+    padding: 10px 6px;
+    font-size: 0.8rem;
+  }
+
+  .btn {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+
+  .order-table table,
+  .orders-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
 .order-table th {
   text-align: right;
   padding: 15px 10px;
@@ -800,7 +897,6 @@ hr {
   color: rgb(105, 105, 105);
 }
 
-/* sudo selectors */
 .search:focus {
   outline: none;
 }
