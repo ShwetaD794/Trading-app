@@ -25,6 +25,7 @@ app.use(
       "http://localhost:5173", // Dashboard
       "http://localhost:5174", // Frontend
       "http://localhost:3000",
+      "https://trading-app3.onrender.com"
     ],
     credentials: true,
   })
@@ -59,8 +60,7 @@ app.post("/signup", async (req, res) => {
   const existingUser = await UserModel.findOne({ email });
   if (existingUser) return res.status(400).send("User already exists");
 
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const newUser = new UserModel({ name, email, password: hashedPassword });
+  const newUser = new UserModel({ name, email, password});
   await newUser.save();
 
   res.send("User registered successfully");
@@ -82,7 +82,7 @@ app.post("/login", async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
+      secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
       maxAge: 24 * 60 * 60 * 1000, 
     });
