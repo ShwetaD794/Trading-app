@@ -25,7 +25,8 @@ app.use(
       "http://localhost:5173", // Dashboard
       "http://localhost:5174", // Frontend
       "http://localhost:3000",
-      "https://trading-app3.onrender.com"
+      "https://trading-app3.onrender.com",
+      "https://trading-appd.onrender.com"
     ],
     credentials: true,
   })
