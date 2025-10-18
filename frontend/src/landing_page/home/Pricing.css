@@ -1,7 +1,61 @@
-.container p {
-    margin: 0;
+.pricing-icon {
+  width: 60px;
+  height: auto;
 }
-.tags{
-    margin-right: 8%;
-    margin-top: 5%;
+
+.pricing-link {
+  color: #007bff;
+  font-weight: 500;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.pricing-link:hover {
+  text-decoration: underline;
+}
+
+.tags p {
+  font-size: 1rem;
+}
+
+h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+  }
+
+  .pricing-icon {
+    width: 50px;
+  }
+
+  .pricing-link {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  .pricing-icon {
+    width: 45px;
+  }
 }

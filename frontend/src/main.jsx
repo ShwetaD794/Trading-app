@@ -15,7 +15,7 @@ import NotFound from '../../NotFound.jsx';
 import Login from './landing_page/signup/Login.jsx';
 import axios from 'axios';
 
-// Send cookies with every axios request by default (so httpOnly token cookie is included)
+
 axios.defaults.withCredentials = true;
 
 

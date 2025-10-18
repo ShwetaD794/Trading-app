@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import GeneralContext from "./GeneralContext";
-import "./Orders.css"; // We'll define this below
+import "./Orders.css"; 
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);

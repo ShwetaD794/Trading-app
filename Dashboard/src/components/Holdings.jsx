@@ -21,7 +21,7 @@ import GeneralContext from "./GeneralContext";
       if (err.response?.status === 401 || err.response?.status === 400) {
         alert("Session expired or unauthorized. Please login again.");
         // Redirect to login
-        window.location.href = "http://localhost:5173/login"; // adjust if needed
+        window.location.href = "http://localhost:5173/login"; 
       }
     }
   };
@@ -30,7 +30,6 @@ import GeneralContext from "./GeneralContext";
 }, [refreshKey]);
 
 
-  // 🧹 Filter out duplicate companies by name
   const uniqueHoldings = Array.from(
     new Map(allHoldings.map((stock) => [stock.name, stock])).values()
   );

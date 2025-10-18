@@ -45,8 +45,6 @@ const WatchList = () => {
           map.set(h.name, marketValue);
         });
 
-        // build data array where companies the user holds have their market value
-        // and others are zero (so doughnut will show only held companies)
         const dataValues = labels.map((name) => map.get(name) || 0);
 
         setChartData({
@@ -63,7 +61,6 @@ const WatchList = () => {
         });
       } catch (err) {
         console.error("Failed to fetch computedHoldings for doughnut:", err);
-        // fallback to zeros
         setChartData({
           labels,
           datasets: [

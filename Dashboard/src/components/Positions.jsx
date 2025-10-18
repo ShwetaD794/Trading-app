@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import GeneralContext from "./GeneralContext";
 
+
 const Positions = () => {
   const [positions, setPositions] = useState([]);
   const [summary, setSummary] = useState({ totalExposure: 0, unrealized: 0, marginUsed: 0, totalQty: 0 });

@@ -1,0 +1,45 @@
+.openacc-container {
+  padding: 4rem 1rem;
+}
+
+
+.home-btn {
+  border-radius: 10px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.home-btn:hover {
+  transform: scale(1.05);
+  background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  p {
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+
+  .home-btn {
+    width: 80%;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  p {
+    font-size: 0.95rem;
+  }
+
+  .home-btn {
+    width: 90%;
+    padding: 10px;
+  }
+}
