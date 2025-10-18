@@ -19,8 +19,9 @@ const BuyActionWindow = ({ uid, mode = "BUY" }) => {
 
   try {
     setIsSubmitting(true);
+    const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3002";
     await axios.post(
-      "http://localhost:3002/newOrder",
+      `${API_BASE}/newOrder`,
       {
         name: uid,
         qty: stockQuantity,

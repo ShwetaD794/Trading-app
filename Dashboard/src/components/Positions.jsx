@@ -12,7 +12,8 @@ const Positions = () => {
   useEffect(() => {
     const fetchPositions = async () => {
       try {
-        const res = await axios.get("http://localhost:3002/computedPositions", { withCredentials: true });
+        const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3002";
+        const res = await axios.get(`${API_BASE}/computedPositions`, { withCredentials: true });
         setPositions(res.data.positions || []);
         setSummary(res.data.summary || {});
       } catch (err) {

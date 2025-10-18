@@ -12,7 +12,8 @@ import GeneralContext from "./GeneralContext";
  useEffect(() => {
   const fetchHoldings = async () => {
     try {
-      const res = await axios.get("http://localhost:3002/computedHoldings", {
+      const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3002";
+      const res = await axios.get(`${API_BASE}/computedHoldings`, {
         withCredentials: true,
       });
       setAllHoldings(res.data);

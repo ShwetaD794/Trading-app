@@ -9,8 +9,9 @@ const Orders = () => {
   const { refreshKey } = useContext(GeneralContext);
 
   useEffect(() => {
+    const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3002";
     axios
-      .get("http://localhost:3002/allOrders", { withCredentials: true })
+      .get(`${API_BASE}/allOrders`, { withCredentials: true })
       .then((res) => setOrders(res.data))
       .catch((err) => {
         console.error("Failed to fetch orders:", err);

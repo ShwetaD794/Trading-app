@@ -8,7 +8,8 @@ export const UserProvider = ({ children }) => {
 
 	const fetchProfile = async () => {
 		try {
-			const res = await axios.get("http://localhost:3002/profile");
+			const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3002";
+			const res = await axios.get(`${API_BASE}/profile`);
 			setUser(res.data.user);
 		} catch (err) {
 			console.error("Session expired or invalid:", err);

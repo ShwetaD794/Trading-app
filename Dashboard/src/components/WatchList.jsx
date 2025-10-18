@@ -35,7 +35,8 @@ const WatchList = () => {
   useEffect(() => {
     const fetchHoldings = async () => {
       try {
-        const res = await axios.get("http://localhost:3002/computedHoldings", { withCredentials: true });
+        const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3002";
+        const res = await axios.get(`${API_BASE}/computedHoldings`, { withCredentials: true });
         const holdings = res.data || [];
 
         // map holdings by name -> marketValue (qty * price)
