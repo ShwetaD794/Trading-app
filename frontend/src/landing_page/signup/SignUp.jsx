@@ -20,7 +20,10 @@ export default function SignUp() {
     e.preventDefault();
     try {
       console.log("Sending signup request...");
-  const response = await axios.post('http://localhost:3002/signup', form, { withCredentials: true });
+      
+  const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3002";
+
+  const response = await axios.post(`${API_BASE}/signup`, form, { withCredentials: true });
       console.log("Signup successful:", response.data);
       navigate('/login')
 

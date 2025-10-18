@@ -11,14 +11,14 @@ export default function Login() {
     console.log("Login clicked");
 
     try {
-      const res = await axios.post("http://localhost:3002/login", {
+      const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3002";
+      const res = await axios.post(`${API_BASE}/login`, {
         email,
         password,
       }, { withCredentials: true });
 
       console.log("Login response:", res.data);
 
-      // Backend sets the JWT as an httpOnly cookie and returns user info in the response.
       if (res.data && res.data.user) {
         console.log("Login successful, redirecting...");
         window.location.href = "http://localhost:5174";
