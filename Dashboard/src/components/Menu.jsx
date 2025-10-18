@@ -19,8 +19,21 @@ const Menu = () => {
 
   return (
     <div className="menu-container">
-      <img src="img/kite-logo.svg" style={{ width: "50px" }} />
-      <div className="menus">
+      <div className="menu-left">
+        <img src="img/kite-logo.svg" style={{ width: "50px" }} />
+      </div>
+
+      <button
+        className="hamburger"
+        aria-label="Toggle menu"
+        onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
+      >
+        <span className="hamburger-box">
+          <span className="hamburger-inner" />
+        </span>
+      </button>
+
+      <div className={`menus ${isProfileDropdownOpen ? "open" : ""}`}>
         <ul>
           <li>
             <Link
