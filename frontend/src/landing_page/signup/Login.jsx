@@ -16,9 +16,6 @@ export default function Login() {
         email,
         password,
       }, { withCredentials: true,
-        headers: {
-            "Content-Type": "application/json",
-          },
        });
 
       console.log("Login response:", res.data);
