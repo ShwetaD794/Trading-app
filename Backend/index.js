@@ -105,6 +105,7 @@ app.post("/login", async (req, res) => {
       httpOnly: true,
       secure: isProd,
       sameSite: isProd ? "none" : "lax",
+      domain: isProd ? ".onrender.com" : undefined,
       maxAge: 24 * 60 * 60 * 1000, 
     });
 
@@ -118,9 +119,12 @@ app.post("/login", async (req, res) => {
 });
 
 app.post("/logout", (req, res) => {
-  res.clearCookie("token", { httpOnly: true,
+  res.clearCookie("token", { 
+  httpOnly: true,
   secure: isProd,
-  sameSite: isProd ? "none" : "lax", });
+  sameSite: isProd ? "none" : "lax", 
+  domain: isProd ? ".onrender.com" : undefined,
+});
   res.json({ ok: true });
 });
 
