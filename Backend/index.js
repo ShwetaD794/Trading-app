@@ -19,15 +19,33 @@ const uri = process.env.MONGO_URL;
 
 const app = express();
 
+const allowedOrigins = [
+  "https://trading-app3.onrender.com", // frontend
+  "https://trading-appd.onrender.com", // dashboard
+];
+
+// app.use(
+//   cors({
+//     origin: [
+//       "http://localhost:5173", // Frontend
+//       "http://localhost:5174", // Dashboard
+//       "http://localhost:3000",
+//       "https://trading-app3.onrender.com",
+//       "https://trading-appd.onrender.com"
+//     ],
+//     credentials: true,
+//   })
+// );
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173", // Frontend
-      "http://localhost:5174", // Dashboard
-      "http://localhost:3000",
-      "https://trading-app3.onrender.com",
-      "https://trading-appd.onrender.com"
-    ],
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
