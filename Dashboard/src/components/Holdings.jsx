@@ -21,8 +21,8 @@ import GeneralContext from "./GeneralContext";
       console.error("Error fetching holdings:", err);
       if (err.response?.status === 401 || err.response?.status === 400) {
         alert("Session expired or unauthorized. Please login again.");
-        // Redirect to login
-        window.location.href = "http://localhost:5173/login"; 
+        const API_BASE = import.meta.env.VITE_API_URL;
+        window.location.href = `${API_BASE}/login`; 
       }
     }
   };

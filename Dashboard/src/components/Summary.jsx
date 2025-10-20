@@ -25,7 +25,8 @@ const Summary = () => {
         const pnl = currentValue - investment;
         setHoldingsSummary({ count: holdings.length, currentValue, investment, pnl });
 
-        const pres = await axios.get("http://localhost:3002/computedPositions", { withCredentials: true });
+        
+        const pres = await axios.get(`${API_BASE}/computedPositions`, { withCredentials: true });
         setPositionsSummary({ marginUsed: pres.data.summary?.marginUsed || 0 });
       } catch (err) {
         console.error("Failed to fetch summaries:", err);

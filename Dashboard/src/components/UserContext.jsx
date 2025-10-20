@@ -14,8 +14,7 @@ export const UserProvider = ({ children }) => {
 		} catch (err) {
 			console.error("Session expired or invalid:", err);
 			setUser(null);
-			// redirect to login app
-			window.location.href = "http://localhost:5173/login";
+			window.location.href = `${API_BASE}/login`;
 		}
 	};
 
