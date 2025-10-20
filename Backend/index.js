@@ -19,18 +19,27 @@ const uri = process.env.MONGO_URL;
 
 const app = express();
 
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5173", // Frontend
-      "http://localhost:5174", // Dashboard
-      "http://localhost:3000",
-      "https://trading-app3.onrender.com",
-      "https://trading-appd.onrender.com"
-    ],
-    credentials: true,
-  })
-);
+const allowedOrigins = [
+  "http://localhost:5173", 
+  "http://localhost:5174",
+  "http://localhost:3000",
+  "https://trading-app3.onrender.com",
+  "https://trading-appd.onrender.com"
+];
+
+app.use(cors({
+  origin: function(origin, callback){
+    // allow requests with no origin (like mobile apps or curl)
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  credentials: true
+}));
+
 
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -85,8 +94,8 @@ app.post("/login", async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: true,
-      sameSite: "None",
+      secure: isProd,
+      sameSite: isProd ? "None" : "Lax",
       maxAge: 24 * 60 * 60 * 1000, 
     });
 
@@ -101,8 +110,8 @@ app.post("/login", async (req, res) => {
 
 app.post("/logout", (req, res) => {
   res.clearCookie("token", { httpOnly: true,
-  secure: true,
-  sameSite: "None" });
+  secure: isProd,
+  sameSite: isProd ? "None" : "Lax", });
   res.json({ ok: true });
 });
 
