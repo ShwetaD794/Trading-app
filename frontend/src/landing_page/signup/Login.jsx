@@ -7,32 +7,43 @@ export default function Login() {
   const [password, setPassword] = useState('');
 
   const handleLogin = async (e) => {
-    e.preventDefault();
-    console.log("Login clicked");
+  e.preventDefault();
+  console.log("Login clicked");
 
-    try {
-      const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3002";
-      const res = await axios.post(`${API_BASE}/login`, {
-        email,
-        password,
-      }, { withCredentials: true,
-       });
+  try {
+    const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3002";
+    const DASHBOARD_URL = import.meta.env.VITE_DASHBOARD_URL || "http://localhost:5174"; // define it here
 
-      console.log("Login response:", res.data);
+    const res = await axios.post(`${API_BASE}/login`, {
+      email,
+      password,
+    }, { withCredentials: true });
 
-      if (res.data && res.data.user) {
-        console.log("Login successful, redirecting...");
-        const DASHBOARD_URL = import.meta.env.VITE_DASHBOARD_URL || "http://localhost:5174";
-        window.location.href = DASHBOARD_URL;
-      } else {
-        alert("Login failed: No user received from server");
+    console.log("Login response:", res.data);
+
+    if (res.data && res.data.user) {
+      try {
+        // Verify session
+        const profileRes = await axios.get(`${API_BASE}/profile`, { withCredentials: true });
+        if (profileRes.data.user) {
+          console.log("Profile verified, redirecting...");
+          window.location.href = DASHBOARD_URL;
+        } else {
+          alert("Login succeeded but could not verify session.");
+        }
+      } catch (err) {
+        console.error("Profile verification error:", err.response?.data || err.message);
+        alert("Login failed: session not set properly.");
       }
-
-    } catch (err) {
-      console.error("Login error:", err.response?.data || err.message);
-      alert("Login failed: " + (err.response?.data || err.message));
+    } else {
+      alert("Login failed: No user received from server");
     }
-  };
+  } catch (err) {
+    console.error("Login error:", err.response?.data || err.message);
+    alert("Login failed: " + (err.response?.data || err.message));
+  }
+};
+
 
   return (
     <div className="login-container">

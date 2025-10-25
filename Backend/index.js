@@ -28,10 +28,15 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: allowedOrigins,
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true); 
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    return callback(new Error("Not allowed by CORS"));
+  },
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
 }));
+
 
 
 app.use(bodyParser.json());
@@ -87,8 +92,8 @@ app.post("/login", async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: true,
-      sameSite: "None",
+      secure: isProd,
+      sameSite: isProd ? "None" : "Lax",
       maxAge: 24 * 60 * 60 * 1000, 
     });
 
@@ -103,8 +108,8 @@ app.post("/login", async (req, res) => {
 
 app.post("/logout", (req, res) => {
   res.clearCookie("token", { httpOnly: true,
-  secure: true,
-  sameSite: "None" });
+  secure: isProd,
+  sameSite: isProd ? "None" : "Lax", });
   res.json({ ok: true });
 });
 
