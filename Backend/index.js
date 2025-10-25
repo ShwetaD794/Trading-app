@@ -23,21 +23,14 @@ const allowedOrigins = [
   "http://localhost:5173", 
   "http://localhost:5174",
   "http://localhost:3000",
-  "https://trading-app3.onrender.com",
-  "https://trading-appd.onrender.com"
+  "https://trading-app3.onrender.com",  //frontend
+  "https://trading-appd.onrender.com"   // dashboard
 ];
 
 app.use(cors({
-  origin: function(origin, callback){
-    // allow requests with no origin (like mobile apps or curl)
-    if(!origin) return callback(null, true);
-    if(allowedOrigins.indexOf(origin) === -1){
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  },
-  credentials: true
+  origin: allowedOrigins,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
 }));
 
 
@@ -94,8 +87,8 @@ app.post("/login", async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: true,
-      secure: isProd,
-      sameSite: isProd ? "None" : "Lax",
+      secure: true,
+      sameSite: "None",
       maxAge: 24 * 60 * 60 * 1000, 
     });
 
@@ -110,8 +103,8 @@ app.post("/login", async (req, res) => {
 
 app.post("/logout", (req, res) => {
   res.clearCookie("token", { httpOnly: true,
-  secure: isProd,
-  sameSite: isProd ? "None" : "Lax", });
+  secure: true,
+  sameSite: "None" });
   res.json({ ok: true });
 });
 
