@@ -22,16 +22,8 @@ export default function Login() {
 
       if (res.data && res.data.user) {
         console.log("Login successful, redirecting...");
-        const DASHBOARD_URL = import.meta.env.VITE_DASHBOARD_URL || "https://trading-appd.onrender.com";
-        // If server returned a oneTimeKey, redirect with it so the dashboard
-        // can call /auth/exchange to have the backend set the httpOnly cookie.
-        if (res.data.oneTimeKey) {
-          const url = new URL(DASHBOARD_URL);
-          url.searchParams.set('oneTimeKey', res.data.oneTimeKey);
-          window.location.href = url.toString();
-        } else {
-          window.location.href = DASHBOARD_URL;
-        }
+        const DASHBOARD_URL = import.meta.env.VITE_DASHBOARD_URL || "http://localhost:5174";
+        window.location.href = DASHBOARD_URL;
       } else {
         alert("Login failed: No user received from server");
       }

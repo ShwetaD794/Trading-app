@@ -10,7 +10,6 @@ const { HoldingsModel } = require("./model/HoldingsModel");
 const { PositionsModel } = require("./model/PositionsModel");
 const { OrdersModel } = require("./model/OrdersModel");
 const { UserModel } = require("./model/UserModel");
-const { OneTimeKeyModel } = require("./model/OneTimeKeyModel");
 
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -98,63 +97,12 @@ app.post("/login", async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000, 
     });
 
-    // Create a short-lived, single-use oneTimeKey so clients that cannot
-    // accept cross-site cookies can exchange it server-side from the dashboard.
-    const crypto = require('crypto');
-    const oneTimeKey = crypto.randomBytes(24).toString('hex');
-    const expiresAt = new Date(Date.now() + 2 * 60 * 1000); // 2 minutes
-
-    try {
-      await OneTimeKeyModel.create({ key: oneTimeKey, userId: user._id, expiresAt });
-    } catch (err) {
-      console.error('Error creating oneTimeKey:', err);
-    }
-
-    // Also return the token and the oneTimeKey in the JSON body as a fallback
     return res.json({
       user: { id: user._id, name: user.name, email: user.email },
-      token,
-      oneTimeKey,
     });
   } catch (err) {
     console.error("Login error:", err);
     res.status(500).json("Internal Server Error");
-  }
-});
-
-// Exchange endpoint: accepts a oneTimeKey and, if valid, sets the httpOnly cookie
-// and returns the user. This allows the dashboard (different origin) to request
-// the backend to set the cookie after a redirect containing the oneTimeKey.
-app.post('/auth/exchange', async (req, res) => {
-  try {
-    const key = req.body?.key || req.query?.key;
-    if (!key) return res.status(400).json({ error: 'Missing oneTimeKey' });
-
-    const otk = await OneTimeKeyModel.findOne({ key });
-    if (!otk) return res.status(404).json({ error: 'Invalid key' });
-    if (otk.used) return res.status(410).json({ error: 'Key already used' });
-    if (otk.expiresAt < new Date()) return res.status(410).json({ error: 'Key expired' });
-
-    const user = await UserModel.findById(otk.userId);
-    if (!user) return res.status(404).json({ error: 'User not found' });
-
-    // Mark used
-    otk.used = true;
-    await otk.save();
-
-    const jwtToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
-
-    res.cookie('token', jwtToken, {
-      httpOnly: true,
-      secure: isProd,
-      sameSite: isProd ? 'None' : 'Lax',
-      maxAge: 24 * 60 * 60 * 1000,
-    });
-
-    return res.json({ user: { id: user._id, name: user.name, email: user.email } });
-  } catch (err) {
-    console.error('Exchange error:', err);
-    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 

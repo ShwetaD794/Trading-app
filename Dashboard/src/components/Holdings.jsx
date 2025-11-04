@@ -21,10 +21,8 @@ import GeneralContext from "./GeneralContext";
       console.error("Error fetching holdings:", err);
       if (err.response?.status === 401 || err.response?.status === 400) {
         alert("Session expired or unauthorized. Please login again.");
-  // Redirect the user to frontend login (not backend API).
-  // Use environment variable if set; otherwise use deployed frontend login URL.
-  const FRONTEND_LOGIN = import.meta.env.VITE_FRONTEND_URL || import.meta.env.VITE_LOGIN_URL || "https://trading-app3.onrender.com/login";
-  window.location.href = FRONTEND_LOGIN;
+        const API_BASE = import.meta.env.VITE_API_URL;
+        window.location.href = `${API_BASE}/login`; 
       }
     }
   };
