@@ -22,7 +22,7 @@ export default function Login() {
 
       if (res.data && res.data.user) {
         console.log("Login successful, redirecting...");
-        const DASHBOARD_URL = import.meta.env.VITE_DASHBOARD_URL || "http://localhost:5174";
+  const DASHBOARD_URL = import.meta.env.VITE_DASHBOARD_URL || "https://trading-appd.onrender.com";
         window.location.href = DASHBOARD_URL;
       } else {
         alert("Login failed: No user received from server");

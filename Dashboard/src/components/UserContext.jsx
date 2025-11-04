@@ -16,7 +16,9 @@ export const UserProvider = ({ children }) => {
 			console.error("Session expired or invalid:", err);
 			setUser(null);
 			// Redirect to the frontend login page (not the backend API)
-			const FRONTEND_LOGIN = import.meta.env.VITE_FRONTEND_URL || import.meta.env.VITE_LOGIN_URL || "http://localhost:5173/login";
+			// Prefer an environment-provided frontend URL. If missing, use the deployed
+			// frontend login URL so deployed dashboard doesn't navigate to localhost in production.
+			const FRONTEND_LOGIN = import.meta.env.VITE_FRONTEND_URL || import.meta.env.VITE_LOGIN_URL || "https://trading-app3.onrender.com/login";
 			window.location.href = FRONTEND_LOGIN;
 		}
 	};
