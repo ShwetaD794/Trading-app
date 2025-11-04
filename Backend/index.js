@@ -97,8 +97,11 @@ app.post("/login", async (req, res) => {
       maxAge: 24 * 60 * 60 * 1000, 
     });
 
+    // Also return the token in the JSON body as a fallback for clients
+    // that cannot rely on third-party cookies (e.g. some mobile browsers/incognito)
     return res.json({
       user: { id: user._id, name: user.name, email: user.email },
+      token,
     });
   } catch (err) {
     console.error("Login error:", err);

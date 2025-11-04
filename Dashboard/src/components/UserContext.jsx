@@ -9,12 +9,15 @@ export const UserProvider = ({ children }) => {
 	const fetchProfile = async () => {
 		try {
 			const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3002";
-			const res = await axios.get(`${API_BASE}/profile`);
+			// Ensure cookies are sent with the request (cross-site cookies)
+			const res = await axios.get(`${API_BASE}/profile`, { withCredentials: true });
 			setUser(res.data.user);
 		} catch (err) {
 			console.error("Session expired or invalid:", err);
 			setUser(null);
-			window.location.href = `${API_BASE}/login`;
+			// Redirect to the frontend login page (not the backend API)
+			const FRONTEND_LOGIN = import.meta.env.VITE_FRONTEND_URL || import.meta.env.VITE_LOGIN_URL || "http://localhost:5173/login";
+			window.location.href = FRONTEND_LOGIN;
 		}
 	};
 
